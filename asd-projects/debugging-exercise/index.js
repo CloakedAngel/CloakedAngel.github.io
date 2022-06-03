@@ -1,4 +1,4 @@
-$(document).ready; {
+$(document).ready(function(){
 
 /////////////////
 // initialization
@@ -146,4 +146,4 @@ function updateCircleOnScreen(circle){
     $(circle.id).css('top', circle.y);
 }
 
-}
+});
