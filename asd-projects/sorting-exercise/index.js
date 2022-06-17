@@ -58,7 +58,7 @@ async function partition(array, left, right){
             await sleep();
         }
     }
-    return pivot[left] += 1
+    return left + 1
 } 
 
 
