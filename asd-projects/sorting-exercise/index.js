@@ -31,16 +31,17 @@ async function quickSort(quickArray, quickLeft, quickRight){
     if (quickArray.length <= 1){
         return
     } else {
-        var index = await partition(quickArray, quickLeft, quickRight);{
-            if (left < index - 1){
+        var index = await partition(quickArray, quickLeft, quickRight);
+            if (quickLeft < index - 1){
                 await quickSort(quickArray, quickLeft, index - 1);
-            if (right > index){
+            }
+            if (quickRight > index){
                 await quickSort(quickArray, index, quickRight)
             }
-            }
+        
         }
-    }
 }
+
 
 // TODOs 4 & 5: Implement partition
 async function partition(array, left, right){
