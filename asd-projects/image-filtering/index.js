@@ -22,8 +22,8 @@ function applyAndRender() {
 
   // Multiple TODOs: Call your apply function(s) here
   applyFilter(reddify);
-  applyFilter(decreaseBlue);
-  applyFilter(increaseGreenbyBlue);
+  applyFilterNoBackground(decreaseBlue);
+  applyFilterNoBackground(increaseGreenbyBlue);
   
 
   // do not change the below line of code
@@ -33,8 +33,6 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 // "apply" and "filter" functions should go below here //
 /////////////////////////////////////////////////////////
-
-// setup variables
 
 
 // TODO 1, 2 & 4: Create the applyFilter function here
@@ -56,11 +54,11 @@ function applyFilterNoBackground(filterFunction){
   for (var i = 0; i < image.length; i++) {
     for (var c = 0; c < image[i].length; c++) {
         var rgbString = image[i][c];   
-        if (background = image[1][1]){ 
-        var rgbNumbers = rgbStringToArray(rgbString);  //stores new array
-        filterFunction(rgbNumbers);                    //alters array
-        rgbString = rgbArrayToString(rgbNumbers);      //converts array back
-        image[i][c] = rgbString                        //string equals image again
+        if (background != image[i][c]){ 
+          var rgbNumbers = rgbStringToArray(rgbString);  //stores new array
+          filterFunction(rgbNumbers);                    //alters array
+          rgbString = rgbArrayToString(rgbNumbers);      //converts array back
+          image[i][c] = rgbString                        //string equals image again
       }
     }
   }
@@ -85,4 +83,12 @@ function keepInBounds(x){
   var answer = Math.min(Math.max(0, x), 255);
     return answer
   }
+
 // CHALLENGE code goes below here
+function smudge(){
+  for (var i = 0; i < image.length; i++) {
+    for (var c = 0; c < image[i].length; c++) {
+        var rgbString = image[i][c];
+    }
+  }
+}
