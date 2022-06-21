@@ -1,0 +1,15 @@
+gameplay: pong
+
+start condition: 1 second after pressing start
+
+end: player has too many points
+
+ifs: player has ? points end game
+     ball hit paddle bounce back
+     ball hits right/left border add points
+
+visual: board, ball, paddle, point tally
+
+events: key press moves paddle
+        button press starts game
+        adding points resents the ball
