@@ -1,15 +1,24 @@
-gameplay: pong
+gameplay: ball bounces from left to right on the screen while players try to get the ball past the other player's paddle without letting it past theirs
 
-start condition: 1 second after pressing start
+start: 1 second after pressing start
+       0 points for both players
+       ball in the middle of the board
+       randomly moves left or right to start the game
+
 
 end: player has too many points
 
 ifs: player has ? points end game
-     ball hit paddle bounce back
-     ball hits right/left border add points
+     ball hit paddle bounce back and add speed
+     ball hits right/left border add point, reset speed, reset ball
+     ball hit top/bottom border bounce back
 
-visual: board, ball, paddle, point tally
+visual: static- board
+        animated- ball
+        animated- paddle
+        static- point tally
 
-events: key press moves paddle
+events: key press down moves paddle
+        key press up stops paddle
         button press starts game
-        adding points resents the ball
+        
