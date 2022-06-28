@@ -12,10 +12,52 @@ body {
 }
 
 #gameItem {
-  background-color: teal;
+  background-color: rgb(255, 255, 255);
   width: 50px;
   height: 50px;
+  border-radius: 30px;
   position: absolute;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+  left: 190px; 
+  top: 190px; 
+}
+
+#scoreBox {
+  background-color: rgb(104, 219, 234);
+  border: 2px solid black;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 150px;
+}
+
+#scoreBox2 {
+  background-color: rgb(104, 219, 234);
+  border: 2px solid black;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 71px;
+  top: -2px;
+}
+
+#paddle {
+  background-color: white;
+  border: 1px solid black;
+  height: 105px;
+  width: 15px;
+  border-radius: 10px;
+  position:absolute;
+  left: 0px;
+  top: 150px;
+}
+
+#paddle2 {
+  background-color: white;
+  border: 1px solid black;
+  height: 105px;
+  width: 15px;
+  border-radius: 10px;
+  position:absolute;
+  left: 423px;
+  top: 150px;
 }

@@ -10,13 +10,37 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  
-  // Game Item Objects
+  var KEY = {
+    ENTER: 13,
+    UP: 38,
+    DOWN: 40,
+    UPW: 87,
+    DOWNS: 83,
+  }
 
+
+  // Game Item Objects
+  function factory(id){
+    var object = {};
+    object.id = id;
+    object.x = parseFloat($(id).css("left"));
+    object.y = parseFloat($(id).css("top"));
+    object.width = $(id).width();
+    object.height = $(id).height();
+    object.speedX = 0;
+    object.speedY = 0;
+    return object;
+  }
+
+  var ball = factory("#gameItem")
+  var paddle = factory("#paddle")
+  var paddle2 = factory("#paddle2")
 
   // one-time setup
-  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('eventType', handleEvent);                           // change 'eventType' to the type of event you want to handle
+  let interval = setInterval(FRAME_RATE, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  $(document).on('keyDown', handleKeyDown);
+  $(document).on('keyUp', handleKeyUp);
+  startBall();
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -26,23 +50,44 @@ function runProgram(){
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
-  function newFrame() {
-    
-
+  function newFrame(){
   }
   
+
   /* 
   Called in response to events.
   */
-  function handleEvent(event) {
-
+  function handleKeyDown(event) {
+    if (event.which === KEY.UPW){
+      paddle.speedY = -5;
+    } else if (event.which === KEY.DOWNS){
+      paddle.speedY = 5;
+    } else if (event.which === KEY.UP){
+      paddle2.speedY = -5;
+    } else if (event.which === KEY.DOWN){
+      paddle2.speedY = 5;
+    }
   }
-
+  
+  function handleKeyUp(event) {
+    if (event.which === KEY.UPW || KEY.DOWNS){
+      paddle.speedY = 0;
+    } else if (event.which === KEY.UP || KEY.DOWN){
+      paddle2.speedY = 0;
+    }
+  }
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function startBall(){
+    ball.x = 190;
+    ball.y = 190;
+    var randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = randomNum;
+    ball.speedX = ball.speedY;
+  };
 
-  
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
@@ -50,5 +95,5 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
-  
+
 }
