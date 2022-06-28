@@ -37,9 +37,9 @@ function runProgram(){
   var paddle2 = factory("#paddle2")
 
   // one-time setup
-  let interval = setInterval(FRAME_RATE, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('keyDown', handleKeyDown);
-  $(document).on('keyUp', handleKeyUp);
+  let interval = setInterval(newFrame, FRAME_RATE, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  $(document).on('keydown', handleKeyDown);
+  $(document).on('keyup', handleKeyUp);
   startBall();
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -51,6 +51,7 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame(){
+    moveObject(ball), moveObject(paddle), moveObject(paddle2)
   }
   
 
@@ -87,6 +88,12 @@ function runProgram(){
     ball.speedX = ball.speedY;
   };
 
+  function moveObject(item){
+    item.x += item.speedX; // update the position along the x-axis
+    item.y += item.speedY; // update the position along the y-axis
+    $("#item").css("left", item.x);
+    $("#item").css("top", item.y)
+  }
 
   function endGame() {
     // stop the interval timer
