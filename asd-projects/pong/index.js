@@ -51,7 +51,9 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame(){
-    moveObject(ball), moveObject(paddle), moveObject(paddle2)
+    moveObject(ball), 
+    moveObject(paddle), 
+    moveObject(paddle2)
   }
 
   /* 
@@ -61,11 +63,11 @@ function runProgram(){
     if (event.which === KEY.UPW){
       paddle.speedY = -5;
     } else if (event.which === KEY.DOWNS){
-      paddle.speedY += 5;
+      paddle.speedY = 5;
     } else if (event.which === KEY.UP){
       paddle2.speedY = -5;
     } else if (event.which === KEY.DOWN){
-      paddle2.speedY += 5;
+      paddle2.speedY = 5;
     }
   }
   
