@@ -40,7 +40,7 @@ function runProgram(){
   let interval = setInterval(newFrame, FRAME_RATE, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp);
-  startBall();
+  startBall;
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -53,7 +53,6 @@ function runProgram(){
   function newFrame(){
     moveObject(ball), moveObject(paddle), moveObject(paddle2)
   }
-  
 
   /* 
   Called in response to events.
@@ -62,11 +61,11 @@ function runProgram(){
     if (event.which === KEY.UPW){
       paddle.speedY = -5;
     } else if (event.which === KEY.DOWNS){
-      paddle.speedY = 5;
+      paddle.speedY += 5;
     } else if (event.which === KEY.UP){
       paddle2.speedY = -5;
     } else if (event.which === KEY.DOWN){
-      paddle2.speedY = 5;
+      paddle2.speedY += 5;
     }
   }
   
@@ -77,6 +76,7 @@ function runProgram(){
       paddle2.speedY = 0;
     }
   }
+
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -86,13 +86,13 @@ function runProgram(){
     var randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
     ball.speedY = randomNum;
     ball.speedX = ball.speedY;
-  };
+  }
 
   function moveObject(item){
     item.x += item.speedX; // update the position along the x-axis
     item.y += item.speedY; // update the position along the y-axis
-    $("#item").css("left", item.x);
-    $("#item").css("top", item.y)
+    $(item).css("left", item.x);
+    $(item).css("top", item.y)
   }
 
   function endGame() {
