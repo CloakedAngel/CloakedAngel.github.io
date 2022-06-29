@@ -10,13 +10,15 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  var KEY = {
+  const KEY = {
     ENTER: 13,
     UP: 38,
     DOWN: 40,
     UPW: 87,
     DOWNS: 83,
   }
+  const BOARD_HEIGHT = $("#board").height();
+  const BOARD_WIDTH = $("#board").width();
 
 
   // Game Item Objects
@@ -40,7 +42,7 @@ function runProgram(){
   let interval = setInterval(newFrame, FRAME_RATE, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp);
-  startBall;
+  startBall();
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -51,9 +53,12 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame(){
-    moveObject(ball), 
-    moveObject(paddle), 
-    moveObject(paddle2)
+    moveObject(ball);
+    moveObject(paddle);
+    moveObject(paddle2);
+    wallCollision(ball);
+    wallCollision(paddle);
+    wallCollision(paddle2);
   }
 
   /* 
@@ -61,31 +66,50 @@ function runProgram(){
   */
   function handleKeyDown(event) {
     if (event.which === KEY.UPW){
-      paddle.speedY = -5;
+      paddle.speedX = -8;
     } else if (event.which === KEY.DOWNS){
-      paddle.speedY = 5;
+      paddle.speedX = 8;
     } else if (event.which === KEY.UP){
-      paddle2.speedY = -5;
+      paddle2.speedX = -8;
     } else if (event.which === KEY.DOWN){
-      paddle2.speedY = 5;
+      paddle2.speedX = 8;
     }
   }
   
   function handleKeyUp(event) {
-    if (event.which === KEY.UPW || KEY.DOWNS){
-      paddle.speedY = 0;
-    } else if (event.which === KEY.UP || KEY.DOWN){
-      paddle2.speedY = 0;
+    if (event.which === KEY.UPW){
+      paddle.speedX = 0;
+    } else if (event.which === KEY.DOWNS){
+      paddle.speedX = 0;
+    } else if (event.which === KEY.UP){
+      paddle2.speedX = 0;
+    } else if (event.which === KEY.DOWN){
+      paddle2.speedX = 0;
     }
   }
 
+  function wallCollision(item){
+    var collide = Math.min(Math.max(0, BOARD_WIDTH), BOARD_HEIGHT);
+    if (collide === item.x || item.y){
+    return collision(collide, item)
+    }
+  }
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function collision(collide, item) {
+    if (collide === true && item === ball){
+    ball.speedX *= -1;
+    ball.speedY *= -1;
+  } else {
+    item.speedX = 0;
+    item.speedY = 0;
+  }
+}
   function startBall(){
     ball.x = 190;
     ball.y = 190;
-    var randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    var randomNum = 5;
     ball.speedY = randomNum;
     ball.speedX = ball.speedY;
   }
@@ -93,8 +117,8 @@ function runProgram(){
   function moveObject(item){
     item.x += item.speedX; // update the position along the x-axis
     item.y += item.speedY; // update the position along the y-axis
-    $(item).css("left", item.x);
-    $(item).css("top", item.y)
+    $(item.id).css("left", item.y)
+    $(item.id).css("top", item.x)
   }
 
   function endGame() {

@@ -47,8 +47,8 @@ body {
   width: 15px;
   border-radius: 10px;
   position:absolute;
-  left: 0px;
-  top: 150px;
+  left: 160px;
+  top: 0px;
 }
 
 #paddle2 {
@@ -58,6 +58,6 @@ body {
   width: 15px;
   border-radius: 10px;
   position:absolute;
-  left: 423px;
-  top: 150px;
+  left: 160px;
+  top: 423px;
 }
