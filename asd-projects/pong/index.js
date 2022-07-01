@@ -19,7 +19,8 @@ function runProgram(){
   }
   const BOARD_HEIGHT = $("#board").height();
   const BOARD_WIDTH = $("#board").width();
-  
+  let scoreVariable1 = 0;
+  let scoreVariable2 = 0;
 
 
   // Game Item Objects
@@ -62,6 +63,8 @@ function runProgram(){
     wallCollision(paddle2);
     doCollide(ball, paddle);
     doCollide(ball, paddle2);
+    $("#scoreBox").text(scoreVariable1);
+    $("#scoreBox2").text(scoreVariable2);
   }
 
   /* 
@@ -95,7 +98,7 @@ function runProgram(){
     if (item.x + item.width >= BOARD_WIDTH) {
       item.x -= item.speedX;
       item.speedX *= -1;
-
+      scoreVariable1 += 1;
     }
     if (item.y + item.height >= BOARD_HEIGHT) {
       item.y -= item.speedY;
@@ -104,6 +107,7 @@ function runProgram(){
     if (item.x <= 0) {
       item.x -= item.speedX;
       item.speedX *= -1;
+      scoreVariable2 += 1;
     }
     if (item.y <= 0) {
       item.y -= item.speedY;
@@ -111,13 +115,15 @@ function runProgram(){
     }
   }
 
-  function score1(){
-
+  if (scoreVariable1 || scoreVariable2 === 7){
+    endGame()
   }
     
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  
+  
   function doCollide(square1, square2) {
     // TODO: calculate and store the remaining
     // sides of the square1
@@ -149,9 +155,10 @@ function runProgram(){
    if (square1.bottomY <= square2.topY){
      return false
   }
-  else 
+  else {
   square1.x -= square1.speedX;
      square1.speedX *= -1;
+  }
 }
 
 
