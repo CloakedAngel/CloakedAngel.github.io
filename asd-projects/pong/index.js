@@ -134,25 +134,25 @@ function runProgram(){
   
   
     // TODO: Return true if they are overlapping, false otherwise
-	if (square1.leftX >= square2.rightX){
+   if (square1.leftX >= square2.rightX){
      square1.x -= square1.speedX;
-      square1.speedX *= -1;
-    } 
+     square1.speedX *= -1;
+   } 
 
-    //  if (square1.topY >= square2.bottomY){
-    //   square1.y -= square1.speedY;
-    //   square1.speedY *= -1;
-    // } 
+   if (square1.topY >= square2.bottomY){
+     square1.y -= square1.speedY;
+     square1.speedY *= -1;
+   } 
   
-     if (square1.rightX <= square2.leftX){
-      square1.x -= square1.speedX;
-      square1.speedX *= -1;
-    } 
+   if (square1.rightX <= square2.leftX){
+     square1.x -= square1.speedX;
+     square1.speedX *= -1;
+   } 
   
-    //  if (square1.bottomY <= square2.topY){
-    //   square1.y -= square1.speedY;
-    //   square1.speedY *= -1;
-    // }
+  if (square1.bottomY <= square2.topY){
+     square1.y -= square1.speedY;
+     square1.speedY *= -1;
+  }
 }
 
 
