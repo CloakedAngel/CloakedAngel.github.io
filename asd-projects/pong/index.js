@@ -19,7 +19,7 @@ function runProgram(){
   }
   const BOARD_HEIGHT = $("#board").height();
   const BOARD_WIDTH = $("#board").width();
-
+  
 
   // Game Item Objects
   function factory(id){
@@ -89,29 +89,44 @@ function runProgram(){
   }
 
   function wallCollision(item){
-    var collide = Math.min(Math.max(0, BOARD_WIDTH), BOARD_HEIGHT);
-    if (collide === item.x || item.y){
-    return collision(collide, item)
+     if ((item.x + item.width) >= BOARD_WIDTH){
+      item.speedX *= -1;
+    } 
+     if ((item.y + item.height) >= BOARD_HEIGHT){
+      item.speedY *= -1;
+    } 
+     if (item.x <= 0){
+      item.speedX *= -1;
+    } 
+     if (item.y <= 0){
+      item.speedY *= -1;
     }
   }
+    
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  function collision(collide, item) {
-    if (collide === true && item === ball){
-    ball.speedX *= -1;
-    ball.speedY *= -1;
-  } else {
-    item.speedX = 0;
-    item.speedY = 0;
-  }
-}
+  
   function startBall(){
     ball.x = 190;
     ball.y = 190;
-    var randomNum = 5;
-    ball.speedY = randomNum;
-    ball.speedX = ball.speedY;
+    var randomNum = Math.ceil(Math.random() * 4)
+    if (randomNum === 1){
+      ball.speedY = 5;
+      ball.speedX = 5;
+    }
+    if (randomNum === 2){
+      ball.speedY = -5;
+      ball.speedX = 5;
+    }
+    if (randomNum === 3){
+      ball.speedY = 5;
+      ball.speedX = -5;
+    }
+    if (randomNum === 4){
+      ball.speedY = -5;
+      ball.speedX = -5;
+    }
   }
 
   function moveObject(item){
