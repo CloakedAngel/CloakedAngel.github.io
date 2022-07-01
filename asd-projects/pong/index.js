@@ -60,8 +60,8 @@ function runProgram(){
     wallCollision(ball);
     wallCollision(paddle);
     wallCollision(paddle2);
-    doCollide(paddle);
-    doCollide(paddle2);
+    doCollide(ball, paddle);
+    doCollide(ball, paddle2);
   }
 
   /* 
@@ -118,27 +118,41 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  function doCollide(player) {
-    // square1.leftX = square1.x;
-    // square1.topY = square1.y;
-    // square1.rightX = square1.x + square1.width;
-    // square1.bottomY = square1.y + square1.height;
+  function doCollide(square1, square2) {
+    // TODO: calculate and store the remaining
+    // sides of the square1
+    square1.leftX = square1.x;
+    square1.topY = square1.y;
+    square1.rightX = square1.x + square1.width;
+    square1.bottomY = square1.y + square1.height;
     
-    // square2.leftX = square2.x;
-    // square2.topY = square2.y;
-    // square2.rightX = square2.x + square2.width;
-    // square2.bottomY = square2.y + square2.height;
+    // TODO: Do the same for square2
+    square2.leftX = square2.x;
+    square2.topY = square2.y;
+    square2.rightX = square2.x + square2.width;
+    square2.bottomY = square2.y + square2.height;
   
   
-	if (ball.x >= player.x + player.width){
-    ball.x -= ball.speedX;
-    ball.speedX *= -1;
+    // TODO: Return true if they are overlapping, false otherwise
+	if (square1.leftX >= square2.rightX){
+     square1.x -= square1.speedX;
+      square1.speedX *= -1;
     } 
-   if (ball.x <= player.x){
-      ball.x -= ball.speedX;
-      ball.speedX *= -1;
-      }
-  else return true;		
+
+    //  if (square1.topY >= square2.bottomY){
+    //   square1.y -= square1.speedY;
+    //   square1.speedY *= -1;
+    // } 
+  
+     if (square1.rightX <= square2.leftX){
+      square1.x -= square1.speedX;
+      square1.speedX *= -1;
+    } 
+  
+    //  if (square1.bottomY <= square2.topY){
+    //   square1.y -= square1.speedY;
+    //   square1.speedY *= -1;
+    // }
 }
 
 
