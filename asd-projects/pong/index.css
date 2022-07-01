@@ -28,6 +28,9 @@ body {
   height: 70px;
   position: absolute;
   left: 150px;
+  text-align: center;
+	display: block;
+  font-size: 300%;
 }
 
 #scoreBox2 {
@@ -38,6 +41,9 @@ body {
   position: absolute;
   left: 71px;
   top: -2px;
+  text-align: center;
+	display: block;
+  font-size: 300%;
 }
 
 #paddle {

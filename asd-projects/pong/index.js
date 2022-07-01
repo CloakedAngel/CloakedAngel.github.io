@@ -21,6 +21,7 @@ function runProgram(){
   const BOARD_WIDTH = $("#board").width();
   
 
+
   // Game Item Objects
   function factory(id){
     var object = {};
@@ -59,6 +60,8 @@ function runProgram(){
     wallCollision(ball);
     wallCollision(paddle);
     wallCollision(paddle2);
+    doCollide(paddle);
+    doCollide(paddle2);
   }
 
   /* 
@@ -89,24 +92,56 @@ function runProgram(){
   }
 
   function wallCollision(item){
-     if ((item.x + item.width) >= BOARD_WIDTH){
+    if (item.x + item.width >= BOARD_WIDTH) {
+      item.x -= item.speedX;
       item.speedX *= -1;
-    } 
-     if ((item.y + item.height) >= BOARD_HEIGHT){
-      item.speedY *= -1;
-    } 
-     if (item.x <= 0){
-      item.speedX *= -1;
-    } 
-     if (item.y <= 0){
+
+    }
+    if (item.y + item.height >= BOARD_HEIGHT) {
+      item.y -= item.speedY;
       item.speedY *= -1;
     }
+    if (item.x <= 0) {
+      item.x -= item.speedX;
+      item.speedX *= -1;
+    }
+    if (item.y <= 0) {
+      item.y -= item.speedY;
+      item.speedY *= -1;
+    }
+  }
+
+  function score1(){
+
   }
     
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function doCollide(player) {
+    // square1.leftX = square1.x;
+    // square1.topY = square1.y;
+    // square1.rightX = square1.x + square1.width;
+    // square1.bottomY = square1.y + square1.height;
+    
+    // square2.leftX = square2.x;
+    // square2.topY = square2.y;
+    // square2.rightX = square2.x + square2.width;
+    // square2.bottomY = square2.y + square2.height;
   
+  
+	if (ball.x >= player.x + player.width){
+    ball.x -= ball.speedX;
+    ball.speedX *= -1;
+    } 
+   if (ball.x <= player.x){
+      ball.x -= ball.speedX;
+      ball.speedX *= -1;
+      }
+  else return true;		
+}
+
+
   function startBall(){
     ball.x = 190;
     ball.y = 190;
